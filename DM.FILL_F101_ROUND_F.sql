@@ -143,7 +143,7 @@ SELECT date_trunc('month', to_date(in_onDate::TEXT,'yyyy-mm-dd'))               
     LEFT  JOIN ds.ft_balance_f bal_f         ON bal_f.account_rk = acct_d.account_rk
                                                 AND bal_f.on_date = date_trunc('month', to_date(in_onDate::TEXT,'yyyy-mm-dd')) - INTERVAL '1 DAY'
     LEFT  JOIN ds.md_exchange_rate_d exch_r  ON exch_r.currency_rk = acct_d.currency_rk
-                                                AND '2018-01-12' between exch_r.data_actual_date and exch_r.data_actual_end_date
+                                                AND in_onDate between exch_r.data_actual_date and exch_r.data_actual_end_date
     LEFT  JOIN dm.dm_account_turnover_f turn ON turn.acc_num = acct_d.account_rk
                                                 AND turn.on_date between date_trunc('month', to_date(in_onDate::TEXT,'yyyy-mm-dd')) 
 												AND date_trunc('month', to_date(in_onDate::TEXT,'yyyy-mm-dd')) + INTERVAL '1 MONTH - 1 day'
